@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../_include/_user/_head %>
+
+    <body>
+        <% include ../_include/_user/_navbar %>
+            <!-- content-area------------ -->
+            <div class="container">
+                <% include ../_include/_user/_left-sidebar %>
+                    <!-- main-content------- -->
+                    <div class="container-fluid">
+                        <%- body %>
+                    </div>
+                    <!-- sidebar------------ -->
+                    <% include ../_include/_user/_right-sidebar %>
+            </div>
+            <% include ../_include/_user/_footer %>
+            <% include ../_include/_user/_script %>
+
+    </body>
+
+</html>
