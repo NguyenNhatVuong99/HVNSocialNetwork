@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>dataTable</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>table</h1>
+  <div style="border: 1px solid; padding: 30px;">
+    <table id="table_id" class="display">
+          <thead>
+                <tr>
+                      <th>email</th>
+                      <th>password</th>
+                      <th>first_name</th>
+                      <th>last_name</th>
+                      <th>birthday</th>
+                      <th>friend_count</th>
+                      <th>is_active</th>
+                  </tr>
+            </thead>
+          <tbody>
+                
+            </tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script src="./javascripts/index.js"></script>
+</body>
+
 </html>
