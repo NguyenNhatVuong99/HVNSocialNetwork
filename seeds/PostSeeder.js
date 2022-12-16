@@ -9,8 +9,8 @@ let getUser = async ()=>{
 let Seeder = async ()=>{
     let users = await getUser();
     for (let index = 0; index < limit; index++) {
-        let index = Math.floor(Math.random() * limit) ;
-        let id = users[index]['_id'];
+        let random = Math.floor(Math.random() * limit) ;
+        let id = users[random]['_id'];
         let newPost = new Post({
             content : faker.lorem.paragraphs(5),
             user_id:id,

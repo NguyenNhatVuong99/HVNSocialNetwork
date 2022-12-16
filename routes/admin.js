@@ -3,6 +3,7 @@ var router = express.Router();
 let AdminController = require("../controllers/Frontend/AdminController")
 
 router.get('/', AdminController.index);
+router.get('/users', AdminController.user);
 
 // route resource role
 // router.group("/roles", (router) => {

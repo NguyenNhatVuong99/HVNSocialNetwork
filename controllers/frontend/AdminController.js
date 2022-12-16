@@ -1,4 +1,7 @@
 let index = (req, res) => {
 	return res.render('layout/admin/index')
 }
-module.exports = { index }
+let user = (req, res) => {
+	return res.render('layout/admin/user')
+}
+module.exports = { index,user }

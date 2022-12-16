@@ -23,9 +23,9 @@ let login = async (req, res) => {
         );
     } else {
         req.session.userId = user._id
-        let role = (user.role=="admin")?"admin":"";
+        let role = (user.role == "admin") ? "admin" : "";
         res.status(200).json({
-            role:role,
+            role: role,
             message: "Đăng nhập thành công"
         })
     }
@@ -46,7 +46,6 @@ let register = async (req, res) => {
     }
     var salt = bcrypt.genSaltSync(10)
     const hashPassword = await bcrypt.hashSync(req.body.password, salt);
-    console.log(req.body);
     let user = new User({
         email: req.body.email,
         first_name: req.body.firstName,

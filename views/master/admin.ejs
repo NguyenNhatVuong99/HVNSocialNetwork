@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include ../_include/_admin/_head %>
-<body>
-    <div class="container-scroller">
-        <% include ../_include/_admin/_navbar %>
-        <div class="container-fluid page-body-wrapper">
-            <% include ../_include/_admin/_theme-setting %>
-            <% include ../_include/_admin/_right-sidebar %>
-            <% include ../_include/_admin/_sidebar %>
-            <div class="main-panel">
-                <%- body %>
-                <% include ../_include/_admin/_footer %>
+
+    <body>
+        <div class="loadingio-spinner-eclipse-t23932lgbh loading d-none">
+            <div class="spinner">
+                <div></div>
             </div>
         </div>
-    </div>
-    <% include ../_include/_admin/_script %>
-</body>
+        <div class="container-scroller">
+            <% include ../_include/_admin/_navbar %>
+                <div class="container-fluid page-body-wrapper">
+                    <% include ../_include/_admin/_theme-setting %>
+                        <% include ../_include/_admin/_right-sidebar %>
+                            <% include ../_include/_admin/_sidebar %>
+                                <div class="main-panel">
+                                    <%- body %>
+                                        <% include ../_include/_admin/_footer %>
+                                </div>
+                </div>
+        </div>
+        <% include ../_include/_admin/_script %>
+    </body>
 
 </html>

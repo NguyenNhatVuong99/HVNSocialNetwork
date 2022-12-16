@@ -1,5 +1,7 @@
+
 let auth = {
     login: async function () {
+        spinner()
         let email = $("#inputEmail").val()
         let password = $("#inputPassword").val()
         let url = "/api/v1/login"
@@ -17,22 +19,25 @@ let auth = {
         try {
             let response = await fetch(url, config)
             let data = await response.json()
+            console.log(data);
+            spinner()
             if (response.status == 200) {
-                if(data.role==="admin"){
-                    window.location.href = "/admin";
-                }else{
-                    window.location.href = "/";
-                }
-                // Swal.fire({
-                //     icon: 'success',
-                //     title: 'Đăng nhập thành công',
-                //     showConfirmButton: false,
-                //     timer: 1500
-                // }).then(result => {
-                //     if (result) {
-                //         window.location.href = "/admin";
-                //     }
-                // });
+                // if(data.role==="admin"){
+                //     window.location.href = "/admin";
+                // }else{
+                //     window.location.href = "/";
+                // }
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng nhập thành công',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(result => {
+                    if (result) {
+                        let href = (data.role=="admin")?"/admin":"/";
+                        window.location.href =href ;
+                    }
+                });
             } else {
                 alert(data.message)
             }

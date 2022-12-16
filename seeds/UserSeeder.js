@@ -25,7 +25,7 @@ let Seeder = async (req, res,) => {
         is_active: faker.datatype.boolean(),
     })
     await newUser2.save()
-    for (let index = 0; index < 10; index++) {
+    for (let index = 0; index < 100; index++) {
         let gender = faker.name.sex()
         var salt = bcrypt.genSaltSync(10)
         let hashPassword = await bcrypt.hashSync('nhatvuong99', salt);
