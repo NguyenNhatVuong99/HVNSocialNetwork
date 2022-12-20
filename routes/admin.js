@@ -4,6 +4,8 @@ let AdminController = require("../controllers/Frontend/AdminController")
 
 router.get('/', AdminController.index);
 router.get('/users', AdminController.user);
+router.get('/posts', AdminController.post);
+router.get('/messages', AdminController.message);
 
 // route resource role
 // router.group("/roles", (router) => {

@@ -570,3 +570,6 @@
 .icon-ellipsis:before {
   content: "\e129";
 }
+.icon-web::before{
+    content: "\F59F";
+}

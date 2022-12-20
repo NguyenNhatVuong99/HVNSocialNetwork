@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const participantSchema = new Schema({
+const ParticipantSchema = new Schema({
     conversation_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Conversation'
@@ -10,11 +10,10 @@ const participantSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-
 },
     {
         timestamps: true
     })
 
-const Participant = mongoose.model('Participant', participantSchema)
-module.exports = { Participant }
+const Participant = mongoose.model('Participant', ParticipantSchema)
+module.exports = Participant 

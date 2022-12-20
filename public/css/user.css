@@ -693,11 +693,9 @@ img.coverImage {
 .background-details a i {
     margin-right: 10px;
 }
-
-.left-profile-sidebar-top.gallery {
-    margin-top: 18px
+.left-profile-sidebar-top.gallery{
+    margin-top:18px
 }
-
 .gallery-photos-rowFirst {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -708,8 +706,6 @@ img.coverImage {
     width: 100%;
     border-radius: 10px;
 }
-
 .gallery-photos-rowFirst div p {
     font-size: 14px;
 }
-

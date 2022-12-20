@@ -9,22 +9,34 @@ let Seeder = async (req, res,) => {
         password: hashPassword,
         first_name: 'Nguyễn Nhất',
         last_name: 'Vương',
-        avatar: faker.image.avatar(),
+        avatar:'/images/logo99.png',
         cover: faker.image.image(),
         role: 'admin',
         is_active: faker.datatype.boolean(),
     })
     await newUser1.save();
     let newUser2 = new User({
-        email: 'tuyetmai99@gmail.com',
+        email: 'doannhat@gmail.com',
         password: hashPassword,
-        first_name: 'Trần Tuyết',
-        last_name: 'Mai',
+        first_name: 'Phan Doãn',
+        last_name: 'Nhật',
+        avatar: faker.image.avatar(),
+        cover: faker.image.image(),
+        role: 'admin',
+        is_active: faker.datatype.boolean(),
+    })
+    await newUser2.save()
+    let newUser3 = new User({
+        email: 'minhhau@gmail.com',
+        password: hashPassword,
+        first_name: 'Nguyễn Minh',
+        last_name: 'Hậu',
+        role: 'admin',
         avatar: faker.image.avatar(),
         cover: faker.image.image(),
         is_active: faker.datatype.boolean(),
     })
-    await newUser2.save()
+    await newUser3.save()
     for (let index = 0; index < 100; index++) {
         let gender = faker.name.sex()
         var salt = bcrypt.genSaltSync(10)

@@ -4,27 +4,19 @@ let index = async (req, res) => {
     res.status(200).json({
         data
     })
-    // let numDocument = 10; // số lượng xuất hiện trong 1 page
-    // let page = req.params.page || 1;
-    // let currentIndex = (numDocument * page) - numDocument + 1;
-    // await User.find()
-    //     .skip((numDocument * page) - numDocument)
-    //     .limit(numDocument)
-    //     .exec((err, users) => {
-    //         User.countDocuments((err, count) => {
-    //             if (err) return res.status(400).json({ err })
-    //             return res.status(200).json({
-    //                 users,
-    //                 currentIndex,
-    //                 currentPage: page, // page hiện tại
-    //                 totalPage: Math.ceil(count / numDocument) // tổng số trang
-    //             })
-
-    //         })
-    //     })
 }
 let show = async (req, res) => {
-
+    let id = req.params.id
+    try {
+        let user = await User.findOne({_id:id})
+        res.status(200).json({
+            user
+        })
+    } catch (error) {
+        res.status(400).json({
+            error
+        })
+    }
 }
 let create = async (req, res) => {
 

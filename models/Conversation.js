@@ -5,6 +5,11 @@ const ConversationSchema = new Schema({
     title: {
         type: String
     },
+    type: {
+        type: String,
+        enum : ['couple','group'],
+        default:'couple'
+    },
     user_id:
     {
         type: mongoose.Schema.Types.ObjectId,

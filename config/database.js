@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
-let url = process.env.MONGODB_URL || 'mongodb://localhost:27017/nhatvuong99'
+let url = "mongodb+srv://nhatvuong99:nhatvuong99@cluster0.gzvqgbc.mongodb.net/hvnSocialNetwork?retryWrites=true&w=majority"
 mongoose.set('strictQuery', true);
 
 async function connect() {

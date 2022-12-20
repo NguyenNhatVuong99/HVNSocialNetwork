@@ -1,18 +1,18 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
-
-const messages = new Schema({
-    participant_id: {
+const MessageSchema = new Schema({
+    conversation_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Participant'
+        ref: 'Conversation'
     },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
     type: {
-        type: String
+        type: String,
+        enum: ['file', 'text'],
+        default: 'text'
     },
     content: {
         type: String
@@ -22,4 +22,4 @@ const messages = new Schema({
         timestamps: true
     });
 
-module.exports = mongoose.model('message',messages)
+module.exports = mongoose.model('Message', MessageSchema)
