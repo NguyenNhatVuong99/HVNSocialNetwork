@@ -1,20 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const friend = new Schema({
-    user_from: {
-        type: String
-    },
-    user_to: {
-        type: String
-    },
-    status_id: {
+const FriendSchema = new Schema({
+    users:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Friend_status'
+        ref: 'User'
     },
-
 },
     {
         timestamps: true
     })
-module.exports = mongoose.model('Friend', friend)
+module.exports = mongoose.model('Friend', FriendSchema)

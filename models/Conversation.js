@@ -10,12 +10,11 @@ const ConversationSchema = new Schema({
         enum : ['couple','group'],
         default:'couple'
     },
-    user_id:
-    {
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    last_message_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Message'
     },
-
 },
 
     {

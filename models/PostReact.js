@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const post_react = new Schema({
+const PostReactSchema = new Schema({
     post_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
@@ -19,4 +19,4 @@ const post_react = new Schema({
         timestamps: true
     })
 
-module.exports = mongoose.model('Post_react', post_react)
+module.exports = mongoose.model('PostReact', PostReactSchema)

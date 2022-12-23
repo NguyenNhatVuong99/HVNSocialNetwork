@@ -30,6 +30,8 @@
     "node-sass": "^8.0.0",
     "nodemon": "^2.0.20",
     "pejs": "^0.6.5",
+    "pusher": "^5.1.2",
+    "socket.io": "^4.5.4",
     "sweetalert2": "^11.6.15"
   },
   "main": "app.js",

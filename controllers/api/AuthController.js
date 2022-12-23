@@ -22,7 +22,7 @@ let login = async (req, res) => {
             { message: "Password không đúng kìa ku" }
         );
     } else {
-        req.session.userId = user._id
+        req.session.userId= user._id
         let role = (user.role == "admin") ? "admin" : "";
         res.status(200).json({
             role: role,

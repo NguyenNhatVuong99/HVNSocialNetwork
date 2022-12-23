@@ -15,30 +15,33 @@ let getPost = async () => {
 const Seeder = async (req, res,) => {
     let users = await getUser()
     let posts = await getPost()
-    for (let index = 0; index < 10; index++) {
-        let random = Math.floor(Math.random() * 20)
-        let user_id = users[random]['_id']
-        let post_id = posts[index]['_id']
-        let content = faker.random.words(5)
-        const newComment = new Comment({
-            content,
-            user_id,
-            post_id: post_id,
-        });
-        await newComment
-            .save()
-            .then((comment) => {
-                Post.findByIdAndUpdate(
-                    post_id,
-                    { $push: { comments: comment._id } },
-                    { new: true, useFindAndModify: false },
-                ),
-                (err, post) => {
-                    if (err) {
-                        return res.status(500).json({ success: false, msg: err.message });
+    for (let index = 0; index < posts.length; index++) {
+        let post_id = posts[index]["_id"]
+        let createdAt = faker.date.between('2022-11-01T00:00:00.000Z', '2022-12-18T00:00:00.000Z')
+        let comments = posts[index]["comments"]
+        let arr = []
+        for (let j = 0; j < 5; j++) {
+            let random = Math.floor(Math.random() * 20)
+            const newComment = new Comment({
+                content: faker.random.words(5),
+                user_id: users[random]['_id'],
+                post_id,
+            });
+            await newComment.save();
+            arr.push(newComment['id'])
+        }
+        Post.updateOne
+            (
+                {
+                    '_id': posts[index]['_id']
+                },
+                {
+                    $set:
+                    {
+                        "comments": arr,
                     }
                 }
-            })
+            )
     }
 
 }

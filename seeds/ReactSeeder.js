@@ -1,11 +1,6 @@
-let bcrypt = require('bcryptjs');
-let { faker } = require('@faker-js/faker/locale/vi');
+let React = require('../models/React')
 
-let User = require('../models/users')
-let Comment = require('../models/comments')
-let React = require('../models/reacts')
-
-const ReactSeeder = async (req, res,) => {
+const Seeder = async (req, res,) => {
     let Like = new React({
         title: "Like",
         content: `<div class="emoji emoji--like">
@@ -90,4 +85,4 @@ const ReactSeeder = async (req, res,) => {
     await Angry.save()
 }
 
-module.exports = { ReactSeeder }
+module.exports = { Seeder }

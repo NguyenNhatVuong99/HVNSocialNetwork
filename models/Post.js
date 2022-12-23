@@ -13,6 +13,7 @@ const PostSchema = new Schema({
         type: String
     },
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+    post_reacts: [{ type: Schema.Types.ObjectId, ref: 'PostReact' }]
 
 },
     {

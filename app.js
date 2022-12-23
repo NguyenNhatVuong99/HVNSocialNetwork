@@ -14,6 +14,12 @@ const RedisStore = require("connect-redis")(session)
 const ClientRedis = new Redis()
 require("./config/database").connect()
 
+
+
+// pusher.trigger("my-channel", "my-event", {
+//   message: "hiiii"
+// });
+
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,8 +46,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('nhatvuong99'));
-
-
 
 app.use(require("./routes/index"));
 

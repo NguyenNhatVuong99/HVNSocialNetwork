@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const react = new Schema({
+const ReactSchema = new Schema({
     title: {
         type: String
     },
@@ -13,4 +13,4 @@ const react = new Schema({
         timestamps: true
     })
 
-module.exports = mongoose.model('React', react)
+module.exports = mongoose.model('React', ReactSchema)

@@ -1,60 +1,49 @@
+const mongoose = require("mongoose");
 let Conversation = require("../../models/Conversation");
 let Message = require("../../models/Message");
 let Participant = require("../../models/Participant")
 let User = require("../../models/User")
 
-let index = async (req, res) => {
-    let current_id = res.locals.currentUser;
-    return res.status(200).json({
-        current_id
-    })
+let user = async (req, res) => {
+    let current_id = req.params.id
+
+    Conversation.find({ users: current_id })
+        .populate('users', '-password')
+        .populate('last_message_id')
+        .sort('-updatedAt')
+        .exec((err, conversations) => {
+            if (err) {
+                return res.status(500).json({ success: false, msg: err.message });
+            } else if (conversations.length === 0) {
+                return res.status(404).json({
+                    success: false,
+                    msg: 'No conversations find in the database!',
+                });
+            }
+            // console.log(conversations);
+            res.status(200).json({ success: true, conversations: conversations });
+        });
+}
+let message = async (req, res) => {
+    let { conversation_id, user_id } = req.body
+    try {
+        let messages = await Message.find({ conversation_id: conversation_id })
+            .populate('user_id', '-password')
+            .sort({ "createdAt": 1 })
+        let user = await User.findOne({ _id: user_id }).select('-password')
+        return res.status(200).json({
+            success: true,
+            data: { messages, user }
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            msg: error
+        })
+    }
 }
 let show = async (req, res) => {
-    let current_id = req.params.id
-    try {
-        let conver1 = await Conversation.find({ user_id: current_id }, "_id")
-        let arrConver1 = []
-        for (let item of conver1) {
-            arrConver1.push(item._id)
-        }
-        let list1 = await Participant.find().where('conversation_id').in(arrConver1)
-        let parti2 = await Participant.find({ user_id: current_id }, "conversation_id")
-        let arrParti2 = []
-        for (let item of parti2) {
-            arrParti2.push(item.conversation_id)
-        }
-        let list2 = await Conversation.find().where("_id").in(arrParti2)
-        let result = []
-        for (let item of list1) {
-            let user = await User.findOne({ _id: item.user_id })
-            let message = await Message.find({ conversation_id: item.conversation_id })
-                .sort({ "createdAt": 1 })
-            let object = {
-                conversation_id: item.conversation_id,
-                user_id: item.user_id,
-                user: user,
-                message: message[0]
-            }
-            result.push(object)
-        }
-        for (let item of list2) {
-            let user = await User.findOne({ _id: item.user_id })
-            let message = await Message.find({ conversation_id: item.conversation_id })
-                .sort({ "created_at": 1 })
-            let object = {
-                conversation_id: item._id,
-                user_id: item.user_id,
-                user: user,
-                message: message[0]
-            }
-            result.push(object)
-        }
-        console.log(result);
-        return res.status(200).json({ result })
 
-    } catch (error) {
-        return res.status(400).json({ error })
-    }
 }
 let create = async (req, res) => {
 
@@ -71,4 +60,4 @@ let update = async (req, res) => {
 let destroy = async (req, res) => {
 
 }
-module.exports = { index, show, create, store, edit, update, destroy }
+module.exports = { user, message, create, store, edit, update, destroy }

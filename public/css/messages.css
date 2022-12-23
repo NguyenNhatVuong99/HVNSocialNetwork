@@ -262,8 +262,11 @@ html {
     background-color: var(--border-color);
 }
 
-.msg-profile.group svg {
-    width: 60%;
+.msg-profile.group img {
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 60px;
 }
 
 .msg {
@@ -316,12 +319,10 @@ html {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--msg-message);
 }
 
 .msg-date {
     font-size: 14px;
-    color: var(--msg-date);
     margin-left: 3px;
 }
 
@@ -413,7 +414,6 @@ html {
     bottom: 0;
     font-size: 12px;
     font-weight: 600;
-    color: var(--msg-date);
     white-space: nowrap;
 }
 
@@ -537,7 +537,6 @@ html {
 .detail-subtitle {
     font-size: 12px;
     font-weight: 600;
-    color: var(--msg-date);
 }
 
 .detail-button {
@@ -799,4 +798,16 @@ html {
     .search-bar input {
         padding-right: 10px;
     }
+}
+
+.float-r {
+    float: right;
+}
+
+.o-2 {
+    opacity: 0.2;
+}
+
+.d-none {
+    display: none !important;
 }

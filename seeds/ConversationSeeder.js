@@ -2,9 +2,9 @@ let { faker } = require('@faker-js/faker/locale/vi');
 
 let User = require('../models/User')
 let Conversation = require('../models/Conversation');
+let Message = require("../models/Message")
 const { get } = require('mongoose');
-let limit = 5;
-let skip = 20;
+let limit = 30;
 let getUser = async () => {
     try {
         return await User.findOne({
@@ -15,33 +15,65 @@ let getUser = async () => {
         console.log(error);
     }
 }
-let getUsers = async () => {
-    let user = await getUser()
+let getUser2 = async () => {
     try {
-        return await User.find({ _id: { $ne: user["_id"] } }, "_id")
-                        .skip(skip)
-                        .limit(limit)
+        return await User.findOne({
+            email: 'doannhat@gmail.com'
+        }, '_id')
+
     } catch (error) {
         console.log(error);
     }
 }
-const Seeder = async (req, res,) => {
+let getUsers = async () => {
     let user = await getUser()
-    let users = await getUsers()
-    for (let index = 0; index < limit; index++) {
-        let id = user['_id']
-        let newConver = new Conversation({
-            user_id: id
-        })
-        await newConver.save()
+    try {
+        return await User.find({ _id: { $ne: user["_id"] } }, "_id")
+            .limit(limit)
+    } catch (error) {
+        console.log(error);
     }
-    for (let index = 0; index < users.length; index++) {
-        let id = users[index]['_id']
-        let newConver = new Conversation({
-            user_id: id
+}
+let getConversation = async () => {
+    return await Conversation.find({})
+}
+const Seeder = async (req, res,) => {
+    // let user = await getUser()
+    // let user2 = await getUser2()
+    // let users = await getUsers()
+    // let arr = [user["_id"], user2["_id"]];
+    // let newConver = new Conversation({
+    //     users: arr
+    // })
+    // await newConver.save()
+    // for (let index = 1; index < limit; index++) {
+    //     let updatedAt = faker.date.between('2022-11-01T00:00:00.000Z', '2022-12-18T00:00:00.000Z')
+    //     console.log(updatedAt);
+    //     let arr = [user["_id"]];
+    //     arr.push(users[index]['_id'])
+    //     let newConver = new Conversation({
+    //         users: arr,
+    //         updatedAt:updatedAt
+    //     })
+    //     await newConver.save()
+    // }
+    let conversations = await getConversation()
+    conversations.forEach(item => {
+        let conver_id = item['_id'];
+        Message.find({ "conversation_id": conver_id }, "_id", (err, message) => {
+            Conversation.findByIdAndUpdate(conver_id, {
+                last_message_id: message[29]
+            },
+                function (err, docs) {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+                        console.log("Updated User : ", docs);
+                    }
+                });
         })
-        await newConver.save()
-    }
+    });
 }
 
 module.exports = { Seeder }

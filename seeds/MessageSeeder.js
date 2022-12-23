@@ -3,12 +3,22 @@ let { faker } = require('@faker-js/faker/locale/vi');
 let User = require('../models/User')
 let Message = require('../models/Message')
 let Conversation = require('../models/Conversation')
-let limit = 5;
+let limit = 30;
 let skip = 20;
 let getUser = async () => {
     try {
         return await User.findOne({
             email: 'nhatvuong99@gmail.com'
+        }, '_id')
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+let getUser2 = async () => {
+    try {
+        return await User.findOne({
+            email: 'doannhat@gmail.com'
         }, '_id')
 
     } catch (error) {
@@ -26,34 +36,25 @@ let getUsers = async () => {
     }
 }
 let getConversation = async () => {
-    return await Conversation.find({}, '_id')
+    return await Conversation.find({})
 }
 
 let Seeder = async (req, res,) => {
-    let user = await getUser()
-    let users = await getUsers()
     let conversations = await getConversation()
-    for (let index = 0; index < limit; index++) {
-        let conver_id = conversations[index]['_id']
-        let newMessage = new Message({
-            conversation_id: conver_id,
-            user_id: user['_id'],
-            content: faker.lorem.sentences(2),
-            createdAt: faker.date.between('2022-11-01T00:00:00.000Z', '2022-12-18T00:00:00.000Z')
-        })
-        await newMessage.save()
-    }
-    for (let index = 0; index < users.length; index++) {
-        let k = index + 5
-        let conver_id = conversations[k]['_id']
-        let newMessage = new Message({
-            conversation_id: conver_id,
-            user_id: users[index]['_id'],
-            content: faker.lorem.sentences(2),
-            createdAt: faker.date.between('2022-11-01T00:00:00.000Z', '2022-12-18T00:00:00.000Z')
-        })
-        await newMessage.save()
-    }
+    conversations.forEach(item => {
+        for (let index = 0; index < limit; index++) {
+            let createdAt = faker.date.between('2022-11-01T00:00:00.000Z', '2022-12-18T00:00:00.000Z')
+            let user_id = (index % 2 == 0) ? item['users'][0] : item['users'][1]
+            let newMessage = new Message({
+                conversation_id: item['_id'],
+                user_id: user_id,
+                content: faker.lorem.sentences(2),
+                createdAt: createdAt,
+                updatedAt:createdAt
+            })
+            newMessage.save()
+        }
+    });
 
 }
 
